@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JeuPoisson : MonoBehaviour
 {
+    float _tempsJeu = 0f;
+
     public float poidsSaumon = 10.5f;
     [SerializeField] private float _poidsSardine = 100f;
 
@@ -14,14 +17,24 @@ public class JeuPoisson : MonoBehaviour
     void Start()
     {
         //Debug.Log(poidsSaumon);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(poidsSaumon);
+        _tempsJeu += Time.deltaTime;
+        Debug.Log(_tempsJeu);
 
+        Vector3 directionDeplacement = new Vector3(1f, 0f, 0f);
+        //Debug.Log(poidsSaumon);
+        _sardine.transform.position += directionDeplacement * 4f * Time.deltaTime;
     }
+
+    public void Redemarrer()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    } 
 
     public void ComparerPoissons()
     {
@@ -36,5 +49,6 @@ public class JeuPoisson : MonoBehaviour
             Debug.Log("Non!");
         }
     }
+
 
 }
